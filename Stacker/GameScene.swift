@@ -51,11 +51,13 @@ class GameScene: SKScene {
         
         if(touchedNode.name == "PushButton"){
             NSLog("Button has been pushed, stop the stack")
-            // 1. stop the current block
+            // 1. stop the current row
             setupRow(curRow, currentNumBlocks: currentNumOfBlocks)
             
             // 2. check if the blocks are in line if curRow >= 2
             if (curRow >= 2){
+                
+                // redirect to game over if false
                 if (checkBlocks() == false){
                     backgroundColor = SKColor.whiteColor()
                     let view = self.view as SKView!
@@ -67,12 +69,20 @@ class GameScene: SKScene {
                 }
             }
             
+            
+            // update the blocks 
+            
+            
+            //3. update score
             if(curRow >= 2){
                 curScore += 10
                 dynamicLabel.text = "Score: " + String(curScore)
             }
+            
+            
         }
         
+        // redirect to winning game
         if (curScore >= 40){
             let view = self.view as SKView!
             let scene:WinningScene =  WinningScene()
