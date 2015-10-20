@@ -24,6 +24,7 @@
 		ABF361EC1BD5B30500C5E69D /* whitebg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABF361E51BD5B30500C5E69D /* whitebg@2x.png */; settings = {ASSET_TAGS = (); }; };
 		ABF361EE1BD5B50900C5E69D /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF361ED1BD5B50900C5E69D /* Block.swift */; settings = {ASSET_TAGS = (); }; };
 		ABF361F01BD5B57800C5E69D /* purple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABF361EF1BD5B57800C5E69D /* purple@2x.png */; settings = {ASSET_TAGS = (); }; };
+		ABF361F41BD5DD4B00C5E69D /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF361F31BD5DD4B00C5E69D /* GameOverScene.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		ABF361E51BD5B30500C5E69D /* whitebg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whitebg@2x.png"; sourceTree = "<group>"; };
 		ABF361ED1BD5B50900C5E69D /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		ABF361EF1BD5B57800C5E69D /* purple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purple@2x.png"; sourceTree = "<group>"; };
+		ABF361F31BD5DD4B00C5E69D /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				ABF361DE1BD5B30500C5E69D /* Images */,
 				ABF361AC1BD5B01700C5E69D /* AppDelegate.swift */,
 				ABF361B01BD5B01700C5E69D /* GameScene.swift */,
+				ABF361F31BD5DD4B00C5E69D /* GameOverScene.swift */,
 				ABF361B21BD5B01700C5E69D /* GameViewController.swift */,
 				ABF361B41BD5B01700C5E69D /* Main.storyboard */,
 				ABF361B71BD5B01700C5E69D /* Assets.xcassets */,
@@ -301,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABF361F41BD5DD4B00C5E69D /* GameOverScene.swift in Sources */,
 				ABF361B11BD5B01700C5E69D /* GameScene.swift in Sources */,
 				ABF361EE1BD5B50900C5E69D /* Block.swift in Sources */,
 				ABF361B31BD5B01700C5E69D /* GameViewController.swift in Sources */,

@@ -21,7 +21,8 @@ class GameScene: SKScene {
     var currentNumOfBlocks = 5
     var numBlocksError = 0
     let blockWidth = Block(name: "size").size.width
-
+    var curScore = 0
+    var fixedPoint = 0
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -49,10 +50,16 @@ class GameScene: SKScene {
             if (curRow >= 2){
                 if (checkBlocks() == false){
                     backgroundColor = SKColor.whiteColor()
+                    let view = self.view as SKView!
+                    let scene:GameOverScene = GameOverScene()
+                    view.presentScene(scene)
+                    
                 
                     
                 }
             }
+            
+            
             
         }
      
@@ -105,28 +112,39 @@ class GameScene: SKScene {
             return true
         }
         
-        
-        if(curBlocks[curBlocks.count-1].position.x > previousBlocks[previousBlocks.count-1].position.x){
-            error = Int( (curBlocks[curBlocks.count-1].position.x + 0.5) - previousBlocks[previousBlocks.count-1].position.x)
-            error = error / Int(blockWidth)
-
+        for(var i = 0; i < curBlocks.count; i++){
+            for(var j = 0; j < previousBlocks.count; j++){
+                if(abs(previousBlocks[j].position.x - curBlocks[i].position.x) < 20.0){
+                    hit += 1
+                }
+            }
         }
+//        
+//        if(curBlocks[curBlocks.count-1].position.x > previousBlocks[previousBlocks.count-1].position.x){
+//            error = Int( (curBlocks[curBlocks.count-1].position.x + 0.5) - previousBlocks[previousBlocks.count-1].position.x)
+//            error = error / Int(blockWidth)
+//
+//        }
+//        
+//        if(curBlocks[curBlocks.count-1].position.x < previousBlocks[previousBlocks.count-1].position.x){
+//            error = Int( (previousBlocks[previousBlocks.count-1].position.x - 0.5) - curBlocks[curBlocks.count-1].position.x)
+//            error = error / Int(blockWidth)
+//        }
+//        
+//        if (error >= curBlocks.count){
+//            return false
+//        }
+//        
+//        
+//
+//        // set the error
+//        numBlocksError = error
         
-        if(curBlocks[curBlocks.count-1].position.x < previousBlocks[previousBlocks.count-1].position.x){
-            error = Int( (previousBlocks[previousBlocks.count-1].position.x - 0.5) - curBlocks[curBlocks.count-1].position.x)
-            error = error / Int(blockWidth)
-        }
+//        if(numBlocksError == curBlocks[curBlocks.count-1]){
+//            return false
+//        }
         
-        if (error >= curBlocks.count){
-            return false
-        }
-        
-        
-
-        // set the error
-        numBlocksError = error
-        
-        if(numBlocksError == curBlocks[curBlocks.count-1]){
+        if(hit < 1){
             return false
         }
         return true
