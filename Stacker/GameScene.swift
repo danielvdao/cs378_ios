@@ -23,9 +23,16 @@ class GameScene: SKScene {
     let blockWidth = Block(name: "size").size.width
     var curScore = 0
     var fixedPoint = 0
+    var dynamicLabel: UILabel = UILabel()
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        dynamicLabel.frame = CGRectMake(50, 150, 200, 21)
+        dynamicLabel.backgroundColor = UIColor.orangeColor()
+        dynamicLabel.textColor = UIColor.blackColor()
+        dynamicLabel.textAlignment = NSTextAlignment.Center
+        dynamicLabel.text = "Score: " + String(curScore)
+        self.view?.addSubview(dynamicLabel)
         backgroundColor = SKColor.blackColor()
         NSLog("Main screen loaded")
         let pushButton = SKSpriteNode(imageNamed: "blue")
@@ -40,6 +47,7 @@ class GameScene: SKScene {
         let touch = touches.first as! UITouch!
         let touchLocation = touch.locationInNode(self)
         let touchedNode = self.nodeAtPoint(touchLocation)
+        
         
         if(touchedNode.name == "PushButton"){
             NSLog("Button has been pushed, stop the stack")
@@ -59,8 +67,16 @@ class GameScene: SKScene {
                 }
             }
             
-            
-            
+            if(curRow >= 2){
+                curScore += 10
+                dynamicLabel.text = "Score: " + String(curScore)
+            }
+        }
+        
+        if (curScore >= 40){
+            let view = self.view as SKView!
+            let scene:WinningScene =  WinningScene()
+            view.presentScene(scene)
         }
      
     }
