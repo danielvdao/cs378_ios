@@ -24,6 +24,7 @@ class GameScene: SKScene {
     var curScore = 0
     var fixedPoint = 0
     var dynamicLabel: UILabel = UILabel()
+    var blocksToDelete:[SKSpriteNode] = []
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -70,8 +71,9 @@ class GameScene: SKScene {
             }
             
             
-            // update the blocks 
-            
+            // update the blocks
+            deleteBlocks()
+            blocksToDelete.removeAll()
             
             //3. update score
             if(curRow >= 2){
@@ -90,6 +92,12 @@ class GameScene: SKScene {
         }
      
     }
+    
+    func deleteBlocks(){
+        for(var i = 0; i < blocksToDelete.count; i++){
+            blocksToDelete[i].texture = SKTexture(imageNamed: "background@2x")
+        }
+    }
 
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
@@ -102,8 +110,8 @@ class GameScene: SKScene {
         for(var i = 0; i < numberOfBlocks; i++){
             let block:Block = Block(name: String(curRow))
             let blockHalfWidth:CGFloat = block.size.width / 2
-            let xPositionStart:CGFloat = size.width / 2 + ((block.size.width) + CGFloat(10))
-            block.position = CGPoint(x:xPositionStart + ((block.size.width + CGFloat(10)) * (CGFloat(i-1))), y: CGFloat(150 + (20 * curRow)) )
+            let xPositionStart:CGFloat = size.width / 2 + ((block.size.width))
+            block.position = CGPoint(x:xPositionStart + ((block.size.width) * (CGFloat(i-1))), y: CGFloat(150 + (20 * curRow)) )
             block.blockRow = curRow
             block.blockColumn = i
             addChild(block)
@@ -123,10 +131,12 @@ class GameScene: SKScene {
         var error = 0
         var hit = 0
         NSLog("in checkBlocks")
+        NSLog("block"+String(curRow-2))
+        NSLog("block"+String(curRow-1))
         enumerateChildNodesWithName("block" + String(curRow - 2)){node, stop in
             let block = node as! SKSpriteNode
             previousBlocks.append(block)
-        
+            
         }
         
         enumerateChildNodesWithName("block" + String(curRow - 1)){node, stop in
@@ -139,10 +149,17 @@ class GameScene: SKScene {
         }
         
         for(var i = 0; i < curBlocks.count; i++){
+            var isBlockHit = false
             for(var j = 0; j < previousBlocks.count; j++){
-                if(abs(previousBlocks[j].position.x - curBlocks[i].position.x) < 20.0){
+//                NSLog(String(abs(previousBlocks[j].position.x - curBlocks[i].position.x)))
+                if(abs(previousBlocks[j].position.x - curBlocks[i].position.x) <= 100.0){
                     hit += 1
+                    isBlockHit = true
                 }
+            }
+            
+            if (isBlockHit == false){
+                blocksToDelete.append(curBlocks[i])
             }
         }
 //        
@@ -171,6 +188,7 @@ class GameScene: SKScene {
 //        }
         
         if(hit < 1){
+            NSLog("Game over?")
             return false
         }
         return true

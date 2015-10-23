@@ -17,7 +17,6 @@ class Block: SKSpriteNode {
         let texture = SKTexture(imageNamed: "purple@2x")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         self.name = "block" + name
-        NSLog(self.name!)
     }
 
     required init?(coder aDecoder: NSCoder) {
